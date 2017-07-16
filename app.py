@@ -1,5 +1,5 @@
 from flask import Flask
-from sh import systemctl, git, cd
+from sh import systemctl, git, cd, sudo
 
 app = Flask(__name__)
 
