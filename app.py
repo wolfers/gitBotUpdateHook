@@ -13,4 +13,4 @@ def index():
     return 'Success'
 
 if __name__ == '__main__':
-    app.run(host='o.o.o.o')
+    app.run(host='0.0.0.0')
