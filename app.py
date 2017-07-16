@@ -1,5 +1,5 @@
 from flask import Flask
-from sh import git, cd
+import os
 import subprocess
 
 app = Flask(__name__)
@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    cd('/home/pi/thombot_v2')
-    git.pull()
+    with os.chdir('/home/pi/thombot_v2'):
+        subprocess.run('git pull', shell=True)
     subprocess.run('sudo systemctl restart discbot', shell=True)
     return 'Success'
 
