@@ -5,7 +5,7 @@ import subprocess
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
     cd('/home/pi/thombot_v2')
     git.pull()
