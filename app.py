@@ -5,10 +5,21 @@ import subprocess
 app = Flask(__name__)
 
 
-@app.route('/')
+class cd:
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
+
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    with os.chdir('/home/pi/thombot_v2'):
-        subprocess.run('git pull', shell=True)
+    with cd('/home/pi/thombot_v2'):
+        subprocess.run('sudo git pull', shell=True)
     subprocess.run('sudo systemctl restart discbot', shell=True)
     return 'Success'
 
