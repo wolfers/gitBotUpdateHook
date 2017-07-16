@@ -1,5 +1,6 @@
 from flask import Flask
-from sh import systemctl, git, cd, sudo
+from sh import git, cd
+import subprocess
 
 app = Flask(__name__)
 
@@ -8,9 +9,8 @@ app = Flask(__name__)
 def index():
     cd('/home/pi/thombot_v2')
     git.pull()
-    systemctl('restart', 'discbot')
-#    call('sudo systemctl restart discbot', shell=True)
+    subprocess.run('sudo systemctl restart discbot', shell=True)
     return 'Success'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='o.o.o.o')
